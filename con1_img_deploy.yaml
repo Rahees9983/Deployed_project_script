@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gottycon
+  namespace: namespace1    
+  labels:
+    app: con1_img
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: con1_img
+  template:
+    metadata:
+      labels:
+        app: con1_img
+    spec:
+      containers:
+      - name: gooty-deploy
+        image: mini_gotty_img 
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
